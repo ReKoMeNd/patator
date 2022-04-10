@@ -805,7 +805,7 @@ def process_logs(queue, indicatorsfmt, argv, log_dir, runtime_file, csv_file, xm
 
   if PY3:
     logging._levelToName[logging.ERROR] = 'FAIL'
-    encoding = 'latin1'
+    encoding = 'utf-8'
   else:
     logging._levelNames[logging.ERROR] = 'FAIL'
     encoding = None
@@ -990,13 +990,13 @@ if PY3:  # http://python3porting.com/problems.html
     if isinstance(x, bytes):
       return x
     else:
-      return x.encode('ISO-8859-1', errors='ignore')
+      return x.encode('UTF-8', errors='ignore')
 
   def B(x):
     if isinstance(x, str):
       return x
     else:
-      return x.decode('ISO-8859-1', errors='ignore')
+      return x.decode('UTF-8', errors='ignore')
 else:
   def b(x):
     return x
@@ -1132,7 +1132,7 @@ def repr23(s):
     return s
 
   if PY3:
-    return repr(s.encode('latin1'))[1:]
+    return repr(s.encode('utf-8'))[1:]
   else:
     return repr(s)
 
