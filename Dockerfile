@@ -29,11 +29,15 @@ COPY ./requirements.txt ./
 RUN python3 -m pip install --upgrade pip \
   && python3 -m pip install -r requirements.txt
 
-
 # utils
-RUN apt-get update && apt-get install -y ipython3 iputils-ping iproute2 netcat curl rsh-client telnet vim mlocate nmap \
+RUN apt-get update && apt-get install -y ipython3 iputils-ping iproute2 netcat curl rsh-client telnet vim mlocate nmap xauth xorg openbox \
   && rm -rf /var/lib/apt/lists/*
 RUN echo 'set bg=dark' > /root/.vimrc
+
+RUN groupadd -g 1000 testus
+RUN useradd -d /home/testus -s /bin/bash -m testus -u 1000 -g 1000
+USER testus
+ENV HOME /home/testus 
 
 COPY ./patator.py ./
 ENTRYPOINT ["python3", "./patator.py"]
