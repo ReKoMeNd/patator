@@ -34,10 +34,5 @@ RUN apt-get update && apt-get install -y ipython3 iputils-ping iproute2 netcat c
   && rm -rf /var/lib/apt/lists/*
 RUN echo 'set bg=dark' > /root/.vimrc
 
-RUN groupadd -g 1000 testus
-RUN useradd -d /home/testus -s /bin/bash -m testus -u 1000 -g 1000
-USER testus
-ENV HOME /home/testus 
-
 COPY ./patator.py ./
 ENTRYPOINT ["python3", "./patator.py"]
