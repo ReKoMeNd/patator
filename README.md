@@ -326,3 +326,19 @@ patator\dist\patator.exe -h
 The resulting stand-alone `patator.exe` executable was confirmed to run successfully on Windows 2003 (5.2.3790), Windows 7 (6.1.7600), Windows 2008 R2 SP1 (6.1.7601) and Windows 2012 R2 (6.3.9600), and is likely to work fine on other Windows versions.
 
 Refer to [#50](https://github.com/lanjelot/patator/issues/50) for more info.
+
+## Docker examples
+
+For correct work of RDP brute in Docker, use this command (don't even ask):
+
+xhost +local:
+
+General example:
+
+sudo docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD/results:/mnt/ patator rdp_login user=FILE0 password=FILE1 host=NET2 0=/mnt/users.txt   1=/mnt/passwords.txt 2=172.16.0.128/25 -R /mnt/logrdpsession1234.txt
+
+Things to remember:
+
+*Order is essential: FILE0, FILE1, FILE2 etc.;
+*Cyrillic works bad, in logs represented as hex symbols (but logins and passwords are sent to devices correctly);
+*For parsing logs, use grep "INFO - 0" logs.txt (code 0 generally shows that attempt was successful).
