@@ -338,7 +338,6 @@ General example:
 sudo docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD/results:/mnt/ patator rdp_login user=FILE0 password=FILE1 host=NET2 0=/mnt/users.txt   1=/mnt/passwords.txt 2=172.16.0.128/25 -R /mnt/logrdpsession1234.txt
 
 Things to remember:
-
-*Order is essential: FILE0, FILE1, FILE2 etc.;
-*Cyrillic works bad, in logs represented as hex symbols (but logins and passwords are sent to devices correctly);
-*For parsing logs, use grep "INFO - 0" logs.txt (code 0 generally shows that attempt was successful).
+1) Order is essential: FILE0, FILE1, FILE2 etc.
+2) Cyrillic works bad, in logs represented as hex symbols (but logins and passwords are sent to devices correctly).
+3) For parsing logs, use grep "INFO - 0" logs.txt (code 0 generally shows that attempt was successful).
